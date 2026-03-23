@@ -1,0 +1,20 @@
+services:
+  backend_service:
+    container_name: backend-service
+    image: backend_image
+    ports:
+      - 8080:8080
+  api_service:
+    container_name: api-service
+    image: api_image
+    ports:
+      - 8081:8081
+    depends_on:
+      - backend_service
+  frontend_service:
+    container_name: frontend-service
+    image: frontend_image
+    ports:
+      - 8085:80
+    depends_on:
+      - backend_service

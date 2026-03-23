@@ -15,3 +15,21 @@ The project also includes a set of security tests to validate:
 * protection against traffic interception
 
 This repository serves as a practical example of applying Zero Trust principles in modern cloud-native systems.
+
+## Application Workflow
+
+### Frontend Service
+- Receives HTTP requests from users via the NGINX Ingress Controller.
+- Calls the API service to fetch or update data.
+
+### API Service
+- Serves as the middle layer between frontend and backend.
+- Handles business logic and orchestrates calls to the backend service.
+- Authenticates requests from the frontend using service identity via mTLS.
+
+### Backend Service
+- Exposes endpoints only accessible by the API service.
+- mTLS ensures that only authorized services can communicate with it.
+
+### Flow Diagram
+![Zero Trust Network Workflow](ZeroTrustWorkflow.drawio.png)

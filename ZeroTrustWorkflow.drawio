@@ -1,0 +1,40 @@
+<mxfile host="app.diagrams.net" agent="Mozilla/5.0 (X11; Linux x86_64; rv:139.0) Gecko/20100101 Firefox/139.0" version="29.6.5">
+  <diagram name="Page-1" id="8ilZuL3erbWar_ldcJc2">
+    <mxGraphModel dx="1612" dy="758" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="kP5QYXWpD7eEb_DfZtfI-4" parent="1" style="shape=datastore;whiteSpace=wrap;html=1;" value="backend service" vertex="1">
+          <mxGeometry height="100" width="140" x="650" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="kP5QYXWpD7eEb_DfZtfI-9" parent="1" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" value="" vertex="1">
+          <mxGeometry height="50" width="70" x="560" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="kP5QYXWpD7eEb_DfZtfI-10" parent="1" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;flipH=1;notch=0;legacyAnchorPoints=0;" value="" vertex="1">
+          <mxGeometry height="40" width="70" x="550" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="kP5QYXWpD7eEb_DfZtfI-13" parent="1" style="shape=message;html=1;html=1;outlineConnect=0;labelPosition=center;verticalLabelPosition=bottom;align=center;verticalAlign=top;" value="" vertex="1">
+          <mxGeometry height="110" width="160" x="350" y="200" as="geometry" />
+        </mxCell>
+        <mxCell id="kP5QYXWpD7eEb_DfZtfI-14" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="api_service" vertex="1">
+          <mxGeometry height="30" width="60" x="400" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="kP5QYXWpD7eEb_DfZtfI-15" parent="1" style="whiteSpace=wrap;html=1;shape=mxgraph.basic.document" value="frontend_service" vertex="1">
+          <mxGeometry height="190" width="150" x="60" y="160" as="geometry" />
+        </mxCell>
+        <mxCell id="kP5QYXWpD7eEb_DfZtfI-16" parent="1" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;flipH=1;notch=0;legacyAnchorPoints=0;" value="" vertex="1">
+          <mxGeometry height="40" width="70" x="230" y="210" as="geometry" />
+        </mxCell>
+        <mxCell id="kP5QYXWpD7eEb_DfZtfI-17" parent="1" style="html=1;shadow=0;dashed=0;align=center;verticalAlign=middle;shape=mxgraph.arrows2.arrow;dy=0.6;dx=40;notch=0;" value="" vertex="1">
+          <mxGeometry height="50" width="70" x="240" y="260" as="geometry" />
+        </mxCell>
+        <mxCell id="kP5QYXWpD7eEb_DfZtfI-18" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="NGINX" vertex="1">
+          <mxGeometry height="30" width="60" x="100" y="360" as="geometry" />
+        </mxCell>
+        <mxCell id="kP5QYXWpD7eEb_DfZtfI-19" parent="1" style="text;html=1;whiteSpace=wrap;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;rounded=0;" value="Java" vertex="1">
+          <mxGeometry height="30" width="60" x="490" y="340" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
