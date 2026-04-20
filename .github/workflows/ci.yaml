@@ -2,26 +2,107 @@ name: CI
 
 on: [push]
 
+env:
+  BACKEND_SERVICE_DIR: backend-service/
+  API_SERVICE_DIR: api-service/
+  FRONTEND_SERVICE_DIR: frontend-service/
 
 jobs:
 
-  build:
-    runs-on: ubuntu-latest
+  build-backend-service:
+    runs-on: alpine/java:21-jdk
     steps: 
      - uses: actions/checkout@v4
      - run: |
-        echo "Multiline"
+        cd $BACKEND_SERVICE_DIR
+        mvn clean build
 
+  build-api-service:
+    runs-on: alpine/java:21-jdk
+    steps: 
+     - uses: actions/checkout@v4
+     - run: |
+        cd $API_SERVICE_DIR
+        mvn clean build"
 
-  test:
+  compile-backend-service:
+    runs-on: alpine/java:21-jdk
+    needs: build-backend-service
+    steps: 
+     - uses: actions/checkout@v4
+     - run: |
+        cd $BACKEND_SERVICE_DIR
+        mvn clean build
+
+  compile-api-service:
+    runs-on: alpine/java:21-jdk
+    needs: build-api-service
+    steps: 
+     - uses: actions/checkout@v4
+     - run: |
+        cd $API_SERVICE_DIR
+        mvn clean build
+
+  test-backend-service:
+    runs-on: alpine/java:21-jdk
+    needs: compile-backend-service
+    steps: 
+     - uses: actions/checkout@v4
+     - run: |
+        cd $BACKEND_SERVICE_DIR
+        mvn test  
+
+  test-api-service:
+    runs-on: alpine/java:21-jdk
+    needs: compile-api-service
+    steps: 
+     - uses: actions/checkout@v4
+     - run: |
+        cd $API_SERVICE_DIR
+        mvn test    
+
+  dockerize-backend-service:
     runs-on: ubuntu-latest
-    needs: build
+    needs: test-backend-service
     steps:
       - uses: actions/checkout@v4
-      - run: echo "pipeline radi"
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build image
+        uses: docker/build-push-action@v5
+        with:
+          context: $BACKEND_SERVICE_DIR
+          push: false
+          tags: backend-service:latest  
 
-  # dockerize:
-  
+  dockerize-api-service:
+    runs-on: ubuntu-latest
+    needs: test-api-service
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build image
+        uses: docker/build-push-action@v5
+        with:
+          context: $API_SERVICE_DIR
+          push: false
+          tags: api-service:latest  
+
+  dockerize-frontend:
+    runs-on: ubuntu-latest
+    needs: [test-backend-service, test-api-service]
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+      - name: Build image
+        uses: docker/build-push-action@v5
+        with:
+          context: $FRONTEND_SERVICE_DIR
+          push: false
+          tags: frontend-service:latest  
+
   # lint:
 
   # deploy:
