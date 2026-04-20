@@ -6,6 +6,8 @@ env:
   BACKEND_SERVICE_DIR: backend-service/
   API_SERVICE_DIR: api-service/
   FRONTEND_SERVICE_DIR: frontend-service/
+  BACKEND_TARGET_DIR: backend-service/target/
+  API_TARGET_DIR: api-service/target/
 
 jobs:
 
@@ -25,6 +27,12 @@ jobs:
           cd $BACKEND_SERVICE_DIR
           mvn clean package
 
+      - name: Upload backend artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: backend-artifact
+          path: $BACKEND_TARGET_DIR
+
   build-api-service:
     runs-on: ubuntu-latest
     steps:
@@ -40,6 +48,12 @@ jobs:
         run: |
           cd $API_SERVICE_DIR
           mvn clean package
+
+      - name: Upload api artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: api-artifact
+          path: $API_TARGET_DIR
 
   test-backend-service:
     runs-on: ubuntu-latest
@@ -81,6 +95,12 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Download backend artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: backend-artifact
+          path: $BACKEND_TARGET_DIR
+
       - name: Build image
         uses: docker/build-push-action@v5
         with:
@@ -93,6 +113,12 @@ jobs:
     needs: test-api-service
     steps:
       - uses: actions/checkout@v4
+
+      - name: Download api artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: api-artifact
+          path: $API_TARGET_DIR
 
       - name: Build image
         uses: docker/build-push-action@v5
