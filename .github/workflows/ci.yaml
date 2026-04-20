@@ -15,10 +15,13 @@ jobs:
 
   test:
     runs-on: ubuntu-latest
+    needs: build
     steps:
       - uses: actions/checkout@v4
       - run: echo "pipeline radi"
 
+  # dockerize:
+  
   # lint:
 
   # deploy:
