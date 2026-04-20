@@ -2,9 +2,11 @@ name: CI
 
 on: [push]
 
+
 jobs:
+
   build:
-    runs on: ubuntu-latest
+    runs-on: ubuntu-latest
     steps: 
      - uses: actions/checkout@v4
      - run: |
@@ -16,3 +18,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: echo "pipeline radi"
+
+  # lint:
+
+  # deploy:
