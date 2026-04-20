@@ -10,99 +10,83 @@ env:
 jobs:
 
   build-backend-service:
-    runs-on: alpine/java:21-jdk
-    steps: 
-     - uses: actions/checkout@v4
-     - run: |
-        cd $BACKEND_SERVICE_DIR
-        mvn clean build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          cd $BACKEND_SERVICE_DIR
+          mvn clean package
 
   build-api-service:
-    runs-on: alpine/java:21-jdk
-    steps: 
-     - uses: actions/checkout@v4
-     - run: |
-        cd $API_SERVICE_DIR
-        mvn clean build"
-
-  compile-backend-service:
-    runs-on: alpine/java:21-jdk
-    needs: build-backend-service
-    steps: 
-     - uses: actions/checkout@v4
-     - run: |
-        cd $BACKEND_SERVICE_DIR
-        mvn clean build
-
-  compile-api-service:
-    runs-on: alpine/java:21-jdk
-    needs: build-api-service
-    steps: 
-     - uses: actions/checkout@v4
-     - run: |
-        cd $API_SERVICE_DIR
-        mvn clean build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          cd $API_SERVICE_DIR
+          mvn clean package
 
   test-backend-service:
-    runs-on: alpine/java:21-jdk
-    needs: compile-backend-service
-    steps: 
-     - uses: actions/checkout@v4
-     - run: |
-        cd $BACKEND_SERVICE_DIR
-        mvn test  
+    runs-on: ubuntu-latest
+    needs: build-backend-service
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          cd $BACKEND_SERVICE_DIR
+          mvn test
 
   test-api-service:
-    runs-on: alpine/java:21-jdk
-    needs: compile-api-service
-    steps: 
-     - uses: actions/checkout@v4
-     - run: |
-        cd $API_SERVICE_DIR
-        mvn test    
+    runs-on: ubuntu-latest
+    needs: build-api-service
+    steps:
+      - uses: actions/checkout@v4
+      - run: |
+          cd $API_SERVICE_DIR
+          mvn test
 
   dockerize-backend-service:
     runs-on: ubuntu-latest
     needs: test-backend-service
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+
       - name: Build image
         uses: docker/build-push-action@v5
         with:
-          context: $BACKEND_SERVICE_DIR
+          context: ${{ env.BACKEND_SERVICE_DIR }}
           push: false
-          tags: backend-service:latest  
+          tags: backend-service:latest
 
   dockerize-api-service:
     runs-on: ubuntu-latest
     needs: test-api-service
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+
       - name: Build image
         uses: docker/build-push-action@v5
         with:
-          context: $API_SERVICE_DIR
+          context: ${{ env.API_SERVICE_DIR }}
           push: false
-          tags: api-service:latest  
+          tags: api-service:latest
 
   dockerize-frontend:
     runs-on: ubuntu-latest
     needs: [test-backend-service, test-api-service]
     steps:
       - uses: actions/checkout@v4
+
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
+
       - name: Build image
         uses: docker/build-push-action@v5
         with:
-          context: $FRONTEND_SERVICE_DIR
+          context: ${{ env.FRONTEND_SERVICE_DIR }}
           push: false
-          tags: frontend-service:latest  
-
-  # lint:
-
-  # deploy:
+          tags: frontend-service:latest
