@@ -3,11 +3,9 @@ name: CI
 on: [push]
 
 env:
-  BACKEND_SERVICE_DIR: backend-service/
-  API_SERVICE_DIR: api-service/
-  FRONTEND_SERVICE_DIR: frontend-service/
-  BACKEND_TARGET_DIR: backend-service/target/
-  API_TARGET_DIR: api-service/target/
+  BACKEND_SERVICE_DIR: backend-service
+  API_SERVICE_DIR: api-service
+  FRONTEND_SERVICE_DIR: frontend-service
 
 jobs:
 
@@ -23,15 +21,13 @@ jobs:
           java-version: 21
 
       - name: Build backend
-        run: |
-          cd $BACKEND_SERVICE_DIR
-          mvn clean package
+        run: mvn -f ${{ env.BACKEND_SERVICE_DIR }}/pom.xml clean package
 
       - name: Upload backend artifact
         uses: actions/upload-artifact@v4
         with:
           name: backend-artifact
-          path: $BACKEND_TARGET_DIR
+          path: ${{ env.BACKEND_SERVICE_DIR }}/target/
 
   build-api-service:
     runs-on: ubuntu-latest
@@ -45,15 +41,13 @@ jobs:
           java-version: 21
 
       - name: Build API
-        run: |
-          cd $API_SERVICE_DIR
-          mvn clean package
+        run: mvn -f ${{ env.API_SERVICE_DIR }}/pom.xml clean package
 
-      - name: Upload api artifact
+      - name: Upload API artifact
         uses: actions/upload-artifact@v4
         with:
           name: api-artifact
-          path: $API_TARGET_DIR
+          path: ${{ env.API_SERVICE_DIR }}/target/
 
   test-backend-service:
     runs-on: ubuntu-latest
@@ -68,9 +62,7 @@ jobs:
           java-version: 21
 
       - name: Test backend
-        run: |
-          cd $BACKEND_SERVICE_DIR
-          mvn test
+        run: mvn -f ${{ env.BACKEND_SERVICE_DIR }}/pom.xml test
 
   test-api-service:
     runs-on: ubuntu-latest
@@ -85,9 +77,7 @@ jobs:
           java-version: 21
 
       - name: Test API
-        run: |
-          cd $API_SERVICE_DIR
-          mvn test
+        run: mvn -f ${{ env.API_SERVICE_DIR }}/pom.xml test
 
   dockerize-backend-service:
     runs-on: ubuntu-latest
@@ -99,9 +89,9 @@ jobs:
         uses: actions/download-artifact@v4
         with:
           name: backend-artifact
-          path: $BACKEND_TARGET_DIR
+          path: ${{ env.BACKEND_SERVICE_DIR }}/target/
 
-      - name: Build image
+      - name: Build backend image
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.BACKEND_SERVICE_DIR }}
@@ -114,13 +104,13 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download api artifact
+      - name: Download API artifact
         uses: actions/download-artifact@v4
         with:
           name: api-artifact
-          path: $API_TARGET_DIR
+          path: ${{ env.API_SERVICE_DIR }}/target/
 
-      - name: Build image
+      - name: Build API image
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.API_SERVICE_DIR }}
@@ -133,7 +123,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build image
+      - name: Build frontend image
         uses: docker/build-push-action@v5
         with:
           context: ${{ env.FRONTEND_SERVICE_DIR }}
