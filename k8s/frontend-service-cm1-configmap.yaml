@@ -1,0 +1,38 @@
+apiVersion: v1
+data:
+  tls.key: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDVEzITswWIVsQA
+    XXidvmE9qQYwBgKVJqIcDBK5mlnENNJ9977KvacW1/7mvKsRGXepjX9vHZ8hQXoQ
+    na4mDgjd1v+fiDDFDZGojXxH3tipal5tMN9ewsRKbrSM7L/7NXA1S2HMZUhnuZr2
+    92WIrXjFeb1T5bRxqU7H+bmqNIDc9bwUUHRVww82s3i/I7WapURg3csBR3jIG7G/
+    9NLUq9ZafKBmgUzyJDgu2YOv4ewU1MyQM4DDxpeff6qacRcpbyY4tLaGDFyF6NP4
+    UuKEYdoqR+xVqcCjqONDShgnaYF35LqUkMJ8aeuvN0vOd7ydijgBj/TA1/totWD9
+    JqB1wf13AgMBAAECggEAINPZRkGxm4TKo8fC2oLHVomhA2sZoMMX/Lw7ck7+f4Un
+    3PJ7eZ7ojFNw2Tm+HV9QGVZMiOEGcEg3NzIj74cABLWoInsIEIP7qf1KZYRG2ysh
+    Ky95ao8VUOZneMLM/TYJeJyJj8UW96wX3O7WvM0FK1+LNM7SEyTjl1m5Kij2pZQK
+    j+GhxGGWnj/pZE31bdywc5tSmIXI6ZySzXiiqjmK9J3c2huVyGssvw2dFwd1pyVv
+    XQUhAgN7yNRBeN8SjVaKhhB9oqh+03cfFTIhNpJa7IrVvTaoiaYJFe5W8s8fxNrR
+    i7cVCSBSmeF/thSlZRpwdWUwXAieGdxhYdJnF3qN6QKBgQDuXzM6+6FJYNj3uiLU
+    tqjGLguFnunD8a1upqIgFM3SoJZ4J/Ssz2DOEEXjUJoENOePo5JJmdYWXUkIjHPZ
+    CMZw4KL2fSoHW2EJJEMPWVYco/jVckFoYnIKcNZ1LaBocAtZHAaSqaXCl8lI0q6g
+    jSN5ypaJessK5cTGP7D+4GKJZQKBgQDk1RSpzAnqJYCohAS2tLkrguursRsqkmS3
+    7efgy8dEc3hWPMNxnGnIojSye+rDUvsx9bgpAzyY+2yAtfixjeHIrH99efw7dUaK
+    2h21YnsVM5wvGae8eLmhRazWpL8EfpE8/4jF9vz15YFKhJzHVk6EAYlvtHfULcno
+    cfXmS8drqwKBgA+cZHqEaDeqBAuVQRq1K7Bu64pAsgaHGViZyRxYwHH+2lvcIgX/
+    PtO/9RPB/5Qu8stRZw8y5/Zm/ZV1vVCFZpmV3JZP9CSvM1ep7EphC2asxmsUJHx1
+    lgphAWqDJnIwhE29rCCGw7hOwHvocE9LbvtW7Szrwchg69Yf7bODdnCRAoGBAMGw
+    Wj0ep4W5GJ2KoTLE5bceqbw5vHTcVMQaaxqrYY9e7YyRAh0395ILOe+ZU6zgoB45
+    jheo1bHnnn+Th11CasoguAjNJ+Jr8bm1xU+ye9wGQzzayk+NIBKRlypXaBe1ydmH
+    sY1e8d5w1G7usIVJWEwDwQD8EDFYUH6fdzPnEHThAoGAHlx/KnKc/u5mumIglpKA
+    v9vmUGqDnz5PLXOh5+zGQh9j31PCM9b4+r1u6xzoCHinuovj5+3+B3RLZpI10YYo
+    UwJAFn6xtuBxZC+NtwTcnDOhxr6kouxvi8/gSVAitU6hGBV0HUR8EW3XjwEHqsHc
+    Bi/qUGBNZIVFUuzc7tH9d80=
+    -----END PRIVATE KEY-----
+kind: ConfigMap
+metadata:
+  annotations:
+    use-subpath: "true"
+  labels:
+    io.kompose.service: frontend-service
+  name: frontend-service-cm1

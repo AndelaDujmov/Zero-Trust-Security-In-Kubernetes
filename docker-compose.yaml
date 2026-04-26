@@ -15,6 +15,9 @@ services:
     container_name: frontend-service
     image: frontend_image
     ports:
-      - 8085:80
+      - 8085:443
     depends_on:
       - backend_service
+    volumes:
+      - ./frontend-service/certs/tls.crt:/etc/nginx/certs/tls.crt
+      - ./frontend-service/certs/tls.key:/etc/nginx/certs/tls.key

@@ -1,0 +1,51 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.38.0 (a8f5d1cbd)
+  labels:
+    io.kompose.service: frontend-service
+  name: frontend-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: frontend-service
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.38.0 (a8f5d1cbd)
+      labels:
+        io.kompose.service: frontend-service
+    spec:
+      containers:
+        - image: frontend_image
+          name: frontend-service
+          ports:
+            - containerPort: 443
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /etc/nginx/certs/tls.crt
+              name: frontend-service-cm0
+              subPath: tls.crt
+            - mountPath: /etc/nginx/certs/tls.key
+              name: frontend-service-cm1
+              subPath: tls.key
+      restartPolicy: Always
+      volumes:
+        - configMap:
+            items:
+              - key: tls.crt
+                path: tls.crt
+            name: frontend-service-cm0
+          name: frontend-service-cm0
+        - configMap:
+            items:
+              - key: tls.key
+                path: tls.key
+            name: frontend-service-cm1
+          name: frontend-service-cm1

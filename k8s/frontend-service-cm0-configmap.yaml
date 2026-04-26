@@ -1,0 +1,32 @@
+apiVersion: v1
+data:
+  tls.crt: |
+    -----BEGIN CERTIFICATE-----
+    MIIDrjCCApagAwIBAgIUN/Deomt97z2W1A0Qwb2Gn3LhmfUwDQYJKoZIhvcNAQEL
+    BQAwYTELMAkGA1UEBhMCSFIxDjAMBgNVBAgMBVNwbGl0MQ4wDAYDVQQHDAVTcGxp
+    dDEOMAwGA1UECgwFRGV2Q0ExDDAKBgNVBAsMA0RldjEUMBIGA1UEAwwLRGV2IFJv
+    b3QgQ0EwHhcNMjYwNDI2MTgyNTMxWhcNMjcwNDI2MTgyNTMxWjBhMQswCQYDVQQG
+    EwJIUjEOMAwGA1UECAwFU3BsaXQxDjAMBgNVBAcMBVNwbGl0MQwwCgYDVQQKDANB
+    cHAxEDAOBgNVBAsMB0JhY2tlbmQxEjAQBgNVBAMMCWxvY2FsaG9zdDCCASIwDQYJ
+    KoZIhvcNAQEBBQADggEPADCCAQoCggEBANUTMhOzBYhWxABdeJ2+YT2pBjAGApUm
+    ohwMErmaWcQ00n33vsq9pxbX/ua8qxEZd6mNf28dnyFBehCdriYOCN3W/5+IMMUN
+    kaiNfEfe2KlqXm0w317CxEputIzsv/s1cDVLYcxlSGe5mvb3ZYiteMV5vVPltHGp
+    Tsf5uao0gNz1vBRQdFXDDzazeL8jtZqlRGDdywFHeMgbsb/00tSr1lp8oGaBTPIk
+    OC7Zg6/h7BTUzJAzgMPGl59/qppxFylvJji0toYMXIXo0/hS4oRh2ipH7FWpwKOo
+    40NKGCdpgXfkupSQwnxp6683S853vJ2KOAGP9MDX+2i1YP0moHXB/XcCAwEAAaNe
+    MFwwGgYDVR0RBBMwEYIJbG9jYWxob3N0hwR/AAABMB0GA1UdDgQWBBTeXmcPQR/G
+    PRum72mJ9b8PDRowAjAfBgNVHSMEGDAWgBTtVNAJcO6IjWv6ROLmS4LNxsk5LjAN
+    BgkqhkiG9w0BAQsFAAOCAQEAHeK8xDugT+jp4OYuU8JrsUi5PYfpuihS69anloqx
+    HAziqTgdIAYmDUaVr077Cp2dlwcI8wz2glhxXDrw5RDqRIFMKRAcOV8tLwXiV+xN
+    RravYvDPwkYPCT/4prMfuJxE8nv78wUwjcVaIy7/sULlrDOP4XSqeol5qDxRqiYH
+    bA2/oeKkpPoXYEJj4V7XBLDSD2jIxHlVX0K5KuraGykZUU+LgP8RvhxWFI1x53Bw
+    ZD7iJbSs0squTr+QNdfPe48xnOBNjphP3a1czSMwvZ+aGg44/VXSd68u7yMOIs1T
+    GYdfn6LB6FTbeqz3wIFhJlPUVYjHlnxVsJysUBzAEUqwlQ==
+    -----END CERTIFICATE-----
+kind: ConfigMap
+metadata:
+  annotations:
+    use-subpath: "true"
+  labels:
+    io.kompose.service: frontend-service
+  name: frontend-service-cm0
