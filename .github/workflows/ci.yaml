@@ -80,7 +80,7 @@ jobs:
 
   dockerize-backend-service:
     runs-on: ubuntu-latest
-    needs: test-backend-service
+    needs: [build-backend-service, test-api-service]
 
     steps:
       - uses: actions/checkout@v4
@@ -100,7 +100,7 @@ jobs:
 
   dockerize-api-service:
     runs-on: ubuntu-latest
-    needs: test-api-service
+    needs: [build-api-service, test-api-service]
 
     steps:
       - uses: actions/checkout@v4
