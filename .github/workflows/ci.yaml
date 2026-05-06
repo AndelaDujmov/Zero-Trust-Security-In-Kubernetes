@@ -82,54 +82,63 @@ jobs:
   dockerize-backend-service:
     runs-on: ubuntu-latest
     needs: test-backend-service
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download backend artifact
-        uses: actions/download-artifact@v4
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
         with:
-          name: backend-artifact
-          path: ${{ env.BACKEND_SERVICE_DIR }}/target/
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build backend image
+      - name: Build and push backend image
         uses: docker/build-push-action@v5
         with:
-          context: ${{ env.BACKEND_SERVICE_DIR }}
-          push: false
-          tags: backend-service:latest
+          context: ./backend-service
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/backend-service:latest
 
   dockerize-api-service:
     runs-on: ubuntu-latest
     needs: test-api-service
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Download API artifact
-        uses: actions/download-artifact@v4
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
         with:
-          name: api-artifact
-          path: ${{ env.API_SERVICE_DIR }}/target/
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
 
-      - name: Build API image
+      - name: Build and push API image
         uses: docker/build-push-action@v5
         with:
-          context: ${{ env.API_SERVICE_DIR }}
-          push: false
-          tags: api-service:latest
+          context: ./api-service
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/api-service:latest
 
-  dockerize-frontend:
+  dockerize-frontend-service:
     runs-on: ubuntu-latest
     needs: [test-backend-service, test-api-service]
+
     steps:
       - uses: actions/checkout@v4
 
-      - name: Build frontend image
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and push frontend image
         uses: docker/build-push-action@v5
         with:
-          context: ${{ env.FRONTEND_SERVICE_DIR }}
-          push: false
-          tags: frontend-service:latest
-
-# push:
+          context: ./frontend-service
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/frontend-service:latest
 # deploy:
 # destroy:
+
+# TODO - add push of ever

@@ -5,12 +5,12 @@ metadata:
     kompose.cmd: kompose convert
     kompose.version: 1.38.0 (a8f5d1cbd)
   labels:
-    io.kompose.service: api-service
-  name: api_service
+    io.kompose.service: backend-service
+  name: backend-service
 spec:
   ports:
-    - name: "8081"
-      port: 8081
-      targetPort: 8081
+    - name: "8080"
+      port: 8080
+      targetPort: 8080
   selector:
-    io.kompose.service: api-service
+    io.kompose.service: backend-service

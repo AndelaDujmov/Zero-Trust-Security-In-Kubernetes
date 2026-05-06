@@ -23,7 +23,7 @@ spec:
         io.kompose.service: frontend-service
     spec:
       containers:
-        - image: frontend_image
+        - image: andela007/frontend_image:1.0.0
           name: frontend-service
           ports:
             - containerPort: 443
@@ -35,6 +35,9 @@ spec:
             - mountPath: /etc/nginx/certs/tls.key
               name: frontend-service-cm1
               subPath: tls.key
+            - mountPath: /etc/nginx/nginx.conf
+              name: nginx-config
+              subPath: nginx.conf
       restartPolicy: Always
       volumes:
         - configMap:
@@ -49,3 +52,6 @@ spec:
                 path: tls.key
             name: frontend-service-cm1
           name: frontend-service-cm1
+        - configMap:
+            name: nginx-config
+          name: nginx-config

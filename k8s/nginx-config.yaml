@@ -1,0 +1,72 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: nginx-config
+  namespace: default
+  uid: 804d375c-ebfb-4cf5-98bc-9f5834a62d62
+  resourceVersion: '8246'
+  creationTimestamp: '2026-05-06T17:55:50Z'
+  managedFields:
+    - manager: kubectl-create
+      operation: Update
+      apiVersion: v1
+      time: '2026-05-06T17:55:50Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        f:data:
+          .: {}
+          f:nginx.conf: {}
+data:
+  nginx.conf: |+
+    worker_processes auto;
+    error_log /var/log/nginx/error.log notice;
+    pid /run/nginx.pid;
+
+    # # Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
+    # include /usr/share/nginx/modules/*.conf;
+
+    events {
+        worker_connections 1024;
+    }
+
+    http {
+        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
+                          '$status $body_bytes_sent "$http_referer" '
+                          '"$http_user_agent" "$http_x_forwarded_for"';
+
+        access_log  /var/log/nginx/access.log;
+
+        sendfile            on;
+        tcp_nopush          on;
+        keepalive_timeout   65;
+        types_hash_max_size 4096;
+
+        include             /etc/nginx/mime.types;
+        default_type        application/octet-stream;
+
+        # include /opt/app-root/etc/nginx.d/*.conf;
+
+        server {
+            # listen              443 ssl;        
+            listen                80;
+
+            server_name  _;
+            root         /opt/app-root/src;
+
+            # ssl_certificate /etc/nginx/certs/tls.crt;
+            # ssl_certificate_key /etc/nginx/certs/tls.key;
+            # ssl_session_cache shared:SSL:1m;
+            # ssl_session_timeout  10m;
+            # ssl_ciphers PROFILE=SYSTEM;
+            # ssl_prefer_server_ciphers on;
+
+            location / {
+                proxy_pass http://api-service:8081;
+                proxy_set_header Host $host;
+                proxy_set_header X-Real-IP $remote_addr;
+            }
+
+            # include /opt/app-root/etc/nginx.default.d/*.conf;
+        }
+    }
+
