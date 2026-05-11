@@ -25,7 +25,6 @@ jobs:
 
   test-api-service:
     runs-on: ubuntu-latest
-    needs: build-api-service
     steps:
       - uses: actions/checkout@v4
 
