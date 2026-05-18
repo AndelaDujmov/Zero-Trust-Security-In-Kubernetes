@@ -48,6 +48,9 @@ data:
                 proxy_pass http://api-service:8081/api/v1/data;
             }
 
+            location / {
+                return 404;
+            }
             # include /opt/app-root/etc/nginx.default.d/*.conf;
         }
     }
