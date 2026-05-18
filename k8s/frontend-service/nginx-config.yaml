@@ -6,6 +6,8 @@ metadata:
   uid: 804d375c-ebfb-4cf5-98bc-9f5834a62d62
   resourceVersion: '8246'
   creationTimestamp: '2026-05-06T17:55:50Z'
+  annotations:
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
   managedFields:
     - manager: kubectl-create
       operation: Update
