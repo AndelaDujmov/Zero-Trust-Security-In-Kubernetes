@@ -19,7 +19,7 @@ data:
             server_name _;
 
             location / {
-                proxy_pass http://api-service:8081/api/v1/data;
+                proxy_pass http://api-service:8081;
 
                 proxy_set_header Host $host;
                 proxy_set_header X-Real-IP $remote_addr;
