@@ -32,7 +32,7 @@ data:
             server_name _;
 
             location / {
-                proxy_pass http://api-service:8081;
+                proxy_pass http://api-service:8081/api/v1/data;
 
                 proxy_http_version 1.1;
 
