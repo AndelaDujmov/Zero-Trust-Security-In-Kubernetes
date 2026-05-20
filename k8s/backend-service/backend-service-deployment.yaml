@@ -21,7 +21,7 @@ spec:
         io.kompose.service: backend-service
     spec:
       containers:
-        - image: andela007/backend_image:1.0.0
+        - image: andela007/backend_image:latest
           name: backend-service
           ports:
             - containerPort: 8080
