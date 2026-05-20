@@ -13,7 +13,7 @@ public class ApiController {
         this.service = service;
     }
 
-    @GetMapping("/data")
+    @GetMapping("/")
     public String getData() {
         return service.process();
     }
@@ -22,7 +22,7 @@ public class ApiController {
     public String getStatus() {
         return service.getStatus();
     }
-    
+
     @PostMapping("/data")
     public String sendData(@RequestBody String input) {
         return service.sendData(input);
