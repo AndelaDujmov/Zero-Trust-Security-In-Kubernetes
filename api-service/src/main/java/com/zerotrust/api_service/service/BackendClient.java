@@ -17,5 +17,19 @@ public class BackendClient {
             backendUrl,
             String.class
         );
+    } 
+    
+    public String getStatus() {
+        return restTemplate.getForObject(backendUrl + "/status", String.class);
     }
+
+    public String postData(String input) {
+        return restTemplate.postForObject(
+            backendUrl + "/data",
+            input,
+            String.class
+        );
+    }
+
+
 }

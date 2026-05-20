@@ -14,4 +14,12 @@ public class ApiService {
     public String process() {
         return "API -> " + backendClient.getBackendData();
     }
+
+    public String getStatus() {
+        return "API → " + backendClient.getStatus();
+    }
+
+    public String sendData(String input) {
+        return "API → stored: " + backendClient.postData(input);
+    }
 }

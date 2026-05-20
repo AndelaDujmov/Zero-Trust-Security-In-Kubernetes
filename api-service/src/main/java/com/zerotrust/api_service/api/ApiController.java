@@ -17,4 +17,14 @@ public class ApiController {
     public String getData() {
         return service.process();
     }
+
+    @GetMapping("/status")
+    public String getStatus() {
+        return service.getStatus();
+    }
+    
+    @PostMapping("/data")
+    public String sendData(@RequestBody String input) {
+        return service.sendData(input);
+    }
 }
