@@ -45,7 +45,7 @@ data:
             # ssl_prefer_server_ciphers on;
 
             location = / {
-                proxy_pass http://api-service:8081/api/v1;
+                proxy_pass http://api-service:8081/api/v1/;
             }
 
             location / {
