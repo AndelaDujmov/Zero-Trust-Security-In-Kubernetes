@@ -5,11 +5,11 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: api-service
+      io.kompose.service: api-service
   ingress:
     - from:
         - podSelector:
             matchLabels:
-              app: frontend-service
+              io.kompose.service: frontend-service
   policyTypes:
     - Ingress

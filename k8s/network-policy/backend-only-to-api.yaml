@@ -5,11 +5,11 @@ metadata:
 spec:
   podSelector:
     matchLabels:
-      app: backend-service
+      io.kompose.service: backend-service
   policyTypes:
     - Egress
   egress:
     - to:
         - podSelector:
             matchLabels:
-              app: api-service
+              io.kompose.service: api-service
