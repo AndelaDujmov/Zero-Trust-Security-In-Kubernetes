@@ -24,6 +24,7 @@ spec:
     spec:
       containers:
         - image: andela007/frontend_image:1.0.0
+          imagePullPolicy: Always
           name: frontend-service
           ports:
             - containerPort: 443
