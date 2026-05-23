@@ -64,7 +64,7 @@ jobs:
         with:
           context: ./backend-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/backend-service:latest
+          tags: andela007/backend-service:latest
 
   dockerize-api-service:
     runs-on: ubuntu-latest
@@ -93,7 +93,7 @@ jobs:
         with:
           context: ./api-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/api-service:latest
+          tags: andela007/api-service:latest
           
   dockerize-frontend-service:
     runs-on: ubuntu-latest
@@ -113,7 +113,7 @@ jobs:
         with:
           context: ./frontend-service
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/frontend-service:latest
+          tags: andela007/frontend-service:latest
 
   deploy-backend-service:
     runs-on: self-hosted
