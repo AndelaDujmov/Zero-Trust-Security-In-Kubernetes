@@ -22,7 +22,6 @@ spec:
     spec:
       containers:
         - image: andela007/api_image:1.0.0
-          imagePullPolicy: Always
           name: api-service
           ports:
             - containerPort: 8081
