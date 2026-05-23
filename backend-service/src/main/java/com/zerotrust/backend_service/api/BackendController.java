@@ -17,7 +17,7 @@ public class BackendController {
     }
 
     @PostMapping("/data")
-    public String postData(String input) {
+    public String postData(@RequestBody String input) {
         dataStore.add(input);
         return "Hello from backend";
     }

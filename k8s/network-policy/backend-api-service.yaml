@@ -1,0 +1,15 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-backend-to-api
+spec:
+  podSelector:
+    matchLabels:
+      app: api-service
+  ingress:
+    - from:
+        - podSelector:
+            matchLabels:
+              app: backend-service
+  policyTypes:
+    - Ingress

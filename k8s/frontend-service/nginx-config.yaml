@@ -48,6 +48,14 @@ data:
                 proxy_pass http://api-service:8081/api/v1/;
             }
 
+            location = /status {
+                proxy_pass http://api-service:8081/api/v1/status;
+            }
+
+            location = /data {
+                proxy_pass http://api-service:8081/api/v1/data;
+            }
+
             location / {
                 return 404;
             }
