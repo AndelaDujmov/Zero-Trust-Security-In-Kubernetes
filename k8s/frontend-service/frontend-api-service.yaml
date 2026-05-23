@@ -7,11 +7,10 @@ spec:
   podSelector:
     matchLabels:
       io.kompose.service: api-service
+  policyTypes:
+    - Ingress
   ingress:
     - from:
         - podSelector:
             matchLabels:
               io.kompose.service: frontend-service
-        - podSelector:
-            matchLabels:
-              io.kompose.service: backend-service
