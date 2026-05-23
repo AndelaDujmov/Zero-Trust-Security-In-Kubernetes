@@ -11,7 +11,7 @@ public class BackendController {
 
     private final List<String> dataStore = new ArrayList<>();
 
-    @GetMapping("/data")
+    @GetMapping("/")
     public String data() {
         return "Hello from backend";
     }
