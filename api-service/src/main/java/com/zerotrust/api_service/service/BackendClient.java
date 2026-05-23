@@ -9,8 +9,8 @@ public class BackendClient {
 
     private final RestTemplate restTemplate = new RestTemplate();
 
-    // @Value("${backend.url}")
-    private String backendUrl="http://backend-service:8080/api/v1";
+    @Value("${backend.url}")
+    private String backendUrl;
 
     public String getBackendData() {
         return restTemplate.getForObject(

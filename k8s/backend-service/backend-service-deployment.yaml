@@ -23,6 +23,7 @@ spec:
       containers:
         - image: andela007/backend-service:latest
           name: backend-service
+          imagePullPolicy: Always
           ports:
             - containerPort: 8080
               protocol: TCP

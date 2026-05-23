@@ -23,6 +23,7 @@ spec:
       containers:
         - image: andela007/api-service:latest
           name: api-service
+          imagePullPolicy: Always
           ports:
             - containerPort: 8081
               protocol: TCP
