@@ -23,7 +23,7 @@ spec:
         io.kompose.service: frontend-service
     spec:
       containers:
-        - image: andela007/frontend_image:latest
+        - image: andela007/frontend-service:latest
           name: frontend-service
           ports:
             - containerPort: 443
