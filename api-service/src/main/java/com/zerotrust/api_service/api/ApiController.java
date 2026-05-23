@@ -24,7 +24,7 @@ public class ApiController {
     }
 
     @PostMapping("/data")
-    public String sendData(@RequestBody String input) {
+    public String sendData(@RequestBody(required = false) String input) {
         return service.sendData(input);
     }
 }
