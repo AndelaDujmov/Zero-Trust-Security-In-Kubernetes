@@ -2,8 +2,11 @@ apiVersion: networking.k8s.io/v1
 kind: NetworkPolicy
 metadata:
   name: default-deny-all
+  namespace: default
 spec:
-  podSelector: {}
+  podSelector:
+    matchLabels:
+      io.kompose.service: backend-service
   policyTypes:
     - Ingress
     - Egress
