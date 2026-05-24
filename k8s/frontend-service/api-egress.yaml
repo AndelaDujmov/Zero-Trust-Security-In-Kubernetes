@@ -20,6 +20,6 @@ spec:
           io.kompose.service: frontend-service
     ports:
     - protocol: TCP
-      port: 8085
+      port: 80
   policyTypes:
   - Egress
