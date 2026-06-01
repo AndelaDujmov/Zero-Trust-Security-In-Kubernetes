@@ -20,6 +20,8 @@ spec:
       labels:
         io.kompose.service: api-service
     spec:
+      serviceAccountName: api-sa  
+      automountServiceAccountToken: false
       containers:
         - image: andela007/api-service:latest
           name: api-service

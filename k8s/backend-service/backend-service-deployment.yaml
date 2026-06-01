@@ -20,6 +20,8 @@ spec:
       labels:
         io.kompose.service: backend-service
     spec:
+      serviceAccountName: backend-sa  
+      automountServiceAccountToken: false
       containers:
         - image: andela007/backend-service:latest
           name: backend-service

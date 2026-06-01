@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: allow-istio-sidecar
+  namespace: default
+spec:
+  podSelector: {}  
+  policyTypes:
+    - Ingress
+    - Egress
+  ingress:
+    - from:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: istio-system
+    - ports:
+        - port: 15021 
+        - port: 15090 
+        - port: 15020  
+  egress:
+    - to:
+        - namespaceSelector:
+            matchLabels:
+              kubernetes.io/metadata.name: istio-system
+    - ports:
+        - port: 15021
+        - port: 15012  
+        - port: 15443  
+        - port: 15010 

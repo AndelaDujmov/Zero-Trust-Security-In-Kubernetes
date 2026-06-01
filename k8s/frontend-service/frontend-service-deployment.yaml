@@ -21,6 +21,8 @@ spec:
         io.kompose.service: frontend-service
 
     spec:
+      serviceAccountName: frontend-sa  
+      automountServiceAccountToken: false
       containers:
         - image: andela007/frontend-service:latest
           name: frontend-service
