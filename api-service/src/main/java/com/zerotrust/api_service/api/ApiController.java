@@ -27,4 +27,14 @@ public class ApiController {
     public String sendData(@RequestBody(required = false) String input) {
         return service.sendData(input);
     }
+
+    @PostMapping("/update")
+    public String updateData(@RequestBody(required = false) int id, @RequestBody(required = false) String input) {
+        return service.updateData(id, input);
+    }
+
+    @PostMapping("/delete")
+    public String deleteData(@RequestBody(required = false) int id) {
+        return service.deleteData(id);
+    }
 }

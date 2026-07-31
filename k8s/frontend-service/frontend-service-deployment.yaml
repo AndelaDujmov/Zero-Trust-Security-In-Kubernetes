@@ -19,12 +19,13 @@ spec:
     metadata:
       labels:
         io.kompose.service: frontend-service
-
+      annotations:
+        sidecar.istio.io/inject: "true"
     spec:
       serviceAccountName: frontend-sa  
       automountServiceAccountToken: false
       containers:
-        - image: andela007/frontend-service:latest
+        - image: nginx:alpine
           name: frontend-service
           imagePullPolicy: Always
 
@@ -33,20 +34,22 @@ spec:
               protocol: TCP
 
           volumeMounts:
-            - mountPath: /etc/nginx/nginx.conf
-              name: nginx-config
-              subPath: nginx.conf
+            - name: html
+              mountPath: /usr/share/nginx/html
+            - name: nginx-conf
+              mountPath: /etc/nginx/conf.d/default.conf
+              subPath: default.conf
 
           readinessProbe:
             httpGet:
-              path: /status
+              path: /
               port: 80
             initialDelaySeconds: 3
             periodSeconds: 5
 
           livenessProbe:
             httpGet:
-              path: /health
+              path: /
               port: 80
             initialDelaySeconds: 10
             periodSeconds: 10
@@ -55,5 +58,8 @@ spec:
 
       volumes:
         - configMap:
-            name: nginx-config
-          name: nginx-config
+            name: frontend-html
+          name: html
+        - name: nginx-conf
+          configMap:
+            name: frontend-nginx

@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: frontend-nginx
+data:
+  default.conf: |
+    server {
+      listen 80;
+
+      location / {
+        root /usr/share/nginx/html;
+        index index.html;
+      }
+
+      location /api/ {
+        proxy_pass http://api-service.default.svc.cluster.local:8081/api/v1/;
+      }
+
+      location /status/ {
+        proxy_pass http://api-service.default.svc.cluster.local:8081/api/v1/status;
+      }
+
+      location /data {
+        proxy_pass http://api-service.default.svc.cluster.local:8081/api/v1/data;
+
+        proxy_set_header Host api-service.default.svc.cluster.local;
+        proxy_set_header X-Real-IP $remote_addr;
+        proxy_set_header Content-Type $http_content_type;
+
+        proxy_pass_request_body on;
+        proxy_pass_request_headers on;
+      }
+    }

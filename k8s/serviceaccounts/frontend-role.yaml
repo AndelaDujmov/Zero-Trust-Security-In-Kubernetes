@@ -6,4 +6,8 @@ metadata:
 rules:
   - apiGroups: [""]
     resources: ["configmaps"]
-    verbs: ["get", "list"]
+    verbs: ["get", "list", "update"]
+  - apiGroups: [""]
+    resources: ["secrets"]
+    resourceNames: ["frontend-tls"] 
+    verbs: ["get", "update"]

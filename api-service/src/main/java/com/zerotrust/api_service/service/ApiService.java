@@ -22,4 +22,12 @@ public class ApiService {
     public String sendData(String input) {
         return "API → stored: " + backendClient.postData(input);
     }
+
+    public String updateData(int id, String input) {
+        return "API → stored: " + backendClient.updateData(id, input);
+    }
+
+    public String deleteData(int id) {
+        return "API → stored: " + backendClient.deleteData(id);
+    }
 }

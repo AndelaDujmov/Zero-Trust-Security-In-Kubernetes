@@ -1,0 +1,13 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-ingress
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      io.kompose.service: frontend-service
+  rules:
+  - from:
+    - source:
+        namespaces: ["istio-system"]

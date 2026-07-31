@@ -1,74 +1,341 @@
 apiVersion: v1
 kind: ConfigMap
 metadata:
-  name: nginx-config
+  name: frontend-html
 data:
-  nginx.conf: |
-    worker_processes auto;
-    error_log /var/log/nginx/error.log notice;
-    pid /run/nginx.pid;
+  index.html: |
+    <!DOCTYPE html>
+    <html lang="en">
 
-    # # Load dynamic modules. See /usr/share/doc/nginx/README.dynamic.
-    # include /usr/share/nginx/modules/*.conf;
+    <head>
+    <meta charset="UTF-8">
+    <title>Kubernetes Service Dashboard</title>
 
-    events {
-        worker_connections 1024;
+    <style>
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
     }
 
-    http {
-        log_format  main  '$remote_addr - $remote_user [$time_local] "$request" '
-                        '$status $body_bytes_sent "$http_referer" '
-                        '"$http_user_agent" "$http_x_forwarded_for"';
+    body{
+        font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
+        background:#0f172a;
+        color:#e2e8f0;
+        display:flex;
+    }
 
-        access_log  /var/log/nginx/access.log;
+    .sidebar{
+        width:240px;
+        background:#111827;
+        height:100vh;
+        padding:30px 20px;
+        border-right:1px solid #1e293b;
+    }
 
-        sendfile            on;
-        tcp_nopush          on;
-        keepalive_timeout   65;
-        types_hash_max_size 4096;
+    .sidebar h2{
+        color:#60a5fa;
+        margin-bottom:40px;
+    }
 
-        include             /etc/nginx/mime.types;
-        default_type        application/octet-stream;
+    .menu{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
 
-        # include /opt/app-root/etc/nginx.d/*.conf;
+    .menu div{
+        padding:12px;
+        border-radius:8px;
+        cursor:pointer;
+        transition:.2s;
+    }
 
-        server {
-            listen              80;
-            server_name  _;
-            root         /opt/app-root/src;
+    .menu div:hover{
+        background:#1e293b;
+    }
 
-            # ssl_certificate /etc/nginx/certs/tls.crt;
-            # ssl_certificate_key /etc/nginx/certs/tls.key;
-            # ssl_session_cache shared:SSL:1m;
-            # ssl_session_timeout  10m;
-            # ssl_ciphers PROFILE=SYSTEM;
-            # ssl_prefer_server_ciphers on;
+    .main{
+        flex:1;
+        padding:30px;
+    }
 
-            location = / {
-                proxy_pass http://api-service:8081/api/v1/;
-            }
+    .header{
+        display:flex;
+        justify-content:space-between;
+        align-items:center;
+        margin-bottom:30px;
+    }
 
-            location = /status {
-                proxy_pass http://api-service:8081/api/v1/status;
-            }
+    .status{
+        background:#22c55e;
+        color:white;
+        padding:8px 15px;
+        border-radius:20px;
+        font-weight:bold;
+    }
 
-            location = /data {
-                proxy_pass http://api-service:8081/api/v1/data;
-            }
+    .cards{
+        display:grid;
+        grid-template-columns:repeat(3,1fr);
+        gap:20px;
+        margin-bottom:25px;
+    }
 
-            location /health {
-                return 200 "ok";
-            }
+    .card{
+        background:#1e293b;
+        padding:20px;
+        border-radius:12px;
+        box-shadow:0 10px 25px rgba(0,0,0,.3);
+    }
 
-            location /status {
-                return 200 "ok";
-            }
+    .card h3{
+        margin-bottom:10px;
+        color:#60a5fa;
+    }
 
-            location / {
-                return 404;
-            }
-            # include /opt/app-root/etc/nginx.default.d/*.conf;
+    .actions{
+        display:grid;
+        grid-template-columns:repeat(4,1fr);
+        gap:15px;
+        margin-bottom:25px;
+    }
+
+    .action{
+        background:#1e293b;
+        padding:20px;
+        border-radius:12px;
+        text-align:center;
+    }
+
+    .action h4{
+        margin-bottom:15px;
+    }
+
+    button{
+        width:100%;
+        padding:12px;
+        background:#2563eb;
+        color:white;
+        border:none;
+        border-radius:8px;
+        cursor:pointer;
+        transition:.2s;
+    }
+
+    button:hover{
+        background:#3b82f6;
+    }
+
+    textarea{
+
+        width:100%;
+        height:180px;
+        background:#020617;
+        color:#f8fafc;
+        border:1px solid #334155;
+        border-radius:10px;
+        padding:15px;
+        font-family:monospace;
+        margin-top:15px;
+    }
+
+    pre{
+
+        background:#020617;
+        border:1px solid #334155;
+        border-radius:10px;
+        padding:20px;
+        min-height:220px;
+        margin-top:15px;
+        overflow:auto;
+        color:#38bdf8;
+
+    }
+
+    .panel{
+
+        display:grid;
+        grid-template-columns:1fr 1fr;
+        gap:20px;
+
+    }
+
+    </style>
+
+    </head>
+
+    <body>
+
+    <div class="sidebar">
+
+    <h2>☸ Kubernetes</h2>
+
+    <div class="menu">
+
+    <div>Dashboard</div>
+    <div>API</div>
+    <div>Monitoring</div>
+    <div>Services</div>
+    <div>Configuration</div>
+
+    </div>
+
+    </div>
+
+    <div class="main">
+
+    <div class="header">
+
+    <h1>Service Dashboard</h1>
+
+    <div class="status">
+    ONLINE
+    </div>
+
+    </div>
+
+    <div class="cards">
+
+    <div class="card">
+    <h3>🌐 Frontend</h3>
+    <p><b>Nginx</b></p>
+    <p>Serving static content</p>
+    </div>
+
+    <div class="card">
+    <h3>🛡 API</h3>
+    <p><b>Spring Boot API</b></p>
+    <p>REST Service</p>
+    </div>
+
+    <div class="card">
+    <h3>☕ Backend</h3>
+    <p><b>Application Service</b></p>
+    <p>Processes client requests</p>
+    </div>
+
+    </div>
+
+    <div class="actions">
+
+    <div class="action">
+    <h4>API Root</h4>
+    <button onclick="request('/api/')">
+    GET /api
+    </button>
+    </div>
+
+    <div class="action">
+    <h4>Health</h4>
+    <button onclick="request('/status/')">
+    GET /status
+    </button>
+    </div>
+
+    <div class="action">
+    <h4>POST Data</h4>
+    <button onclick="sendData()">
+    POST /data
+    </button>
+    </div>
+
+    <div class="action">
+    <h4>Clear</h4>
+    <button onclick="clearOutput()">
+    Clear Output
+    </button>
+    </div>
+
+    </div>
+
+    <div class="panel">
+
+    <div>
+
+    <h2>JSON Payload</h2>
+
+    <textarea id="payload">
+    {
+        "input":"Istio Demo"
+    }
+    </textarea>
+
+    </div>
+
+    <div>
+
+    <h2>Response</h2>
+
+    <pre id="output">
+    Ready...
+    </pre>
+
+    </div>
+
+    </div>
+
+    </div>
+
+    <script>
+
+    async function request(url){
+
+        try{
+
+            const res=await fetch(url);
+
+            const text=await res.text();
+
+            document.getElementById("output").textContent=text;
+
+        }catch(e){
+
+            document.getElementById("output").textContent=e;
+
         }
+
     }
 
+    async function sendData(){
 
+        try{
+
+            const payload=JSON.parse(document.getElementById("payload").value);
+
+            const res=await fetch("/data",{
+
+                method:"POST",
+
+                headers:{
+                    "Content-Type":"application/json"
+                },
+
+                body:JSON.stringify(payload)
+
+            });
+
+            const text=await res.text();
+
+            document.getElementById("output").textContent=text;
+
+        }catch(e){
+
+            document.getElementById("output").textContent=e;
+
+        }
+
+    }
+
+    function clearOutput(){
+
+        document.getElementById("output").textContent="";
+
+    }
+
+    </script>
+
+    </body>
+
+    </html>

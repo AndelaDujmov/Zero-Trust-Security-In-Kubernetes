@@ -1,6 +1,9 @@
 package com.zerotrust.api_service.service;
 
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -31,5 +34,30 @@ public class BackendClient {
         );
     }
 
+     public String updateData(int id, String input) {
+        HttpHeaders headers = new HttpHeaders();
+        headers.setContentType(MediaType.TEXT_PLAIN);
 
+        HttpEntity<String> entity = new HttpEntity<>(input, headers);
+
+        ResponseEntity<String> response = restTemplate.exchange(
+                backendUrl + "/data/" + id,
+                HttpMethod.PUT,
+                entity,
+                String.class
+        );
+
+        return response.getBody();
+    }
+
+    public String deleteData(int id) {
+        ResponseEntity<String> response = restTemplate.exchange(
+                backendUrl + "/data/" + id,
+                HttpMethod.DELETE,
+                null,
+                String.class
+        );
+
+        return response.getBody();
+    }
 }

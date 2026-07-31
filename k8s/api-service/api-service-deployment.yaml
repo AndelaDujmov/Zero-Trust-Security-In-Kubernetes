@@ -19,6 +19,8 @@ spec:
         kompose.version: 1.38.0 (a8f5d1cbd)
       labels:
         io.kompose.service: api-service
+      annotations:
+        sidecar.istio.io/inject: "true"
     spec:
       serviceAccountName: api-sa  
       automountServiceAccountToken: false

@@ -1,0 +1,20 @@
+apiVersion: security.istio.io/v1beta1
+kind: AuthorizationPolicy
+metadata:
+  name: allow-api
+  namespace: default
+spec:
+  selector:
+    matchLabels:
+      io.kompose.service: api-service
+  action: ALLOW
+  rules:
+    - from:
+        - source:
+            principals:
+              - "cluster.local/ns/default/sa/frontend-sa"
+              - "cluster.local/ns/default/sa/backend-sa"
+      to:
+        - operation:
+            ports: ["8081"]
+            methods: ["GET", "POST"]

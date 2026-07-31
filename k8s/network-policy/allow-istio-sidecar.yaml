@@ -4,7 +4,7 @@ metadata:
   name: allow-istio-sidecar
   namespace: default
 spec:
-  podSelector: {}  
+  podSelector: {}
   policyTypes:
     - Ingress
     - Egress
@@ -13,17 +13,26 @@ spec:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: istio-system
-    - ports:
-        - port: 15021 
-        - port: 15090 
-        - port: 15020  
+      ports:                   
+        - port: 15021
+          protocol: TCP
+        - port: 15090
+          protocol: TCP
+        - port: 15020
+          protocol: TCP
   egress:
     - to:
         - namespaceSelector:
             matchLabels:
               kubernetes.io/metadata.name: istio-system
-    - ports:
+      ports:                   
         - port: 15021
-        - port: 15012  
-        - port: 15443  
-        - port: 15010 
+          protocol: TCP
+        - port: 15012
+          protocol: TCP
+        - port: 15443
+          protocol: TCP
+        - port: 15010
+          protocol: TCP
+        - port: 15014
+          protocol: TCP
