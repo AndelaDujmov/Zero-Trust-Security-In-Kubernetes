@@ -30,4 +30,12 @@ data:
         proxy_pass_request_body on;
         proxy_pass_request_headers on;
       }
+
+      location /update {
+        proxy_pass http://api-service:8081/api/v1/update;
+      }
+        
+      location /delete {
+          proxy_pass http://api-service:8081/api/v1/delete;
+      }
     }

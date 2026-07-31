@@ -179,6 +179,10 @@ data:
     <div>Monitoring</div>
     <div>Services</div>
     <div>Configuration</div>
+    <div onclick="window.location.href='/forbidden.html'">
+    Forbidden Requests
+    </div>
+
 
     </div>
 
