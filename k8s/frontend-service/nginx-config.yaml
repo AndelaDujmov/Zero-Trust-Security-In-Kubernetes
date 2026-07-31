@@ -344,27 +344,83 @@ data:
 
     </html>
 
-  forbidden.html: |
+forbidden.html: |
     <!DOCTYPE html>
-    <html>
+    <html lang="en">
+
     <head>
+    <meta charset="UTF-8">
     <title>Forbidden Requests</title>
 
     <style>
+
+    *{
+        margin:0;
+        padding:0;
+        box-sizing:border-box;
+    }
 
     body{
         font-family:Segoe UI,Tahoma,Geneva,Verdana,sans-serif;
         background:#0f172a;
         color:#e2e8f0;
-        padding:40px;
+        display:flex;
     }
 
-    .container{
+
+    .sidebar{
+        width:240px;
+        background:#111827;
+        height:100vh;
+        padding:30px 20px;
+        border-right:1px solid #1e293b;
+    }
+
+
+    .sidebar h2{
+        color:#60a5fa;
+        margin-bottom:40px;
+    }
+
+
+    .menu{
+        display:flex;
+        flex-direction:column;
+        gap:15px;
+    }
+
+
+    .menu div{
+        padding:12px;
+        border-radius:8px;
+        cursor:pointer;
+        transition:.2s;
+    }
+
+
+    .menu div:hover{
+        background:#1e293b;
+    }
+
+
+    .main{
+        flex:1;
+        padding:30px;
+    }
+
+
+    .card{
         background:#1e293b;
         padding:30px;
         border-radius:12px;
         max-width:700px;
     }
+
+
+    h1{
+        margin-bottom:20px;
+    }
+
 
     button{
         width:200px;
@@ -377,78 +433,156 @@ data:
         cursor:pointer;
     }
 
+
     button:hover{
         background:#ef4444;
     }
 
+
     pre{
         background:#020617;
-        padding:20px;
+        border:1px solid #334155;
         border-radius:10px;
+        padding:20px;
         margin-top:20px;
+        min-height:150px;
         color:#38bdf8;
     }
+
 
     </style>
 
     </head>
 
+
     <body>
 
-    <div class="container">
+
+    <div class="sidebar">
+
+    <h2>☸ Kubernetes</h2>
+
+
+    <div class="menu">
+
+    <div onclick="window.location.href='/'">
+    Dashboard
+    </div>
+
+    <div>
+    API
+    </div>
+
+    <div>
+    Monitoring
+    </div>
+
+    <div>
+    Services
+    </div>
+
+    <div>
+    Configuration
+    </div>
+
+
+    <div onclick="window.location.href='/forbidden.html'">
+    Forbidden Requests
+    </div>
+
+
+    </div>
+
+    </div>
+
+
+
+    <div class="main">
+
+
+    <div class="card">
+
 
     <h1>Forbidden Requests</h1>
+
 
     <p>
     Test Istio AuthorizationPolicy blocking.
     </p>
 
+
+    <br>
+
+
     <button onclick="testPut()">
     PUT Request
     </button>
+
 
     <button onclick="testDelete()">
     DELETE Request
     </button>
 
 
+
     <pre id="output">
     Waiting...
     </pre>
 
+
+
     </div>
+
+
+    </div>
+
 
 
     <script>
 
+
     async function testPut(){
 
         const response = await fetch("/update",{
+
             method:"PUT",
+
             headers:{
                 "Content-Type":"text/plain"
             },
+
             body:"Unauthorized update attempt"
+
         });
+
 
         document.getElementById("output").textContent =
             response.status + "\n" +
             await response.text();
+
     }
+
 
 
     async function testDelete(){
 
         const response = await fetch("/delete",{
+
             method:"DELETE"
+
         });
+
 
         document.getElementById("output").textContent =
             response.status + "\n" +
             await response.text();
+
     }
+
 
     </script>
 
+
     </body>
+
     </html>
