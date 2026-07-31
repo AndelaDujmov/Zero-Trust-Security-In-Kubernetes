@@ -8,19 +8,31 @@ data:
       listen 80;
 
       location / {
+        if ($http_x_forwarded_client_cert = "") {
+            return 403 "Client certificate required.";
+        }
         root /usr/share/nginx/html;
         index index.html;
       }
 
       location /api/ {
+        if ($http_x_forwarded_client_cert = "") {
+            return 403 "Client certificate required.";
+        }
         proxy_pass http://api-service.default.svc.cluster.local:8081/api/v1/;
       }
 
       location /status/ {
+        if ($http_x_forwarded_client_cert = "") {
+            return 403 "Client certificate required.";
+        }
         proxy_pass http://api-service.default.svc.cluster.local:8081/api/v1/status;
       }
 
       location /data {
+        if ($http_x_forwarded_client_cert = "") {
+            return 403 "Client certificate required.";
+        }
         proxy_pass http://api-service.default.svc.cluster.local:8081/api/v1/data;
 
         proxy_set_header Host api-service.default.svc.cluster.local;
@@ -32,10 +44,16 @@ data:
       }
 
       location /update {
+        if ($http_x_forwarded_client_cert = "") {
+            return 403 "Client certificate required.";
+        }
         proxy_pass http://api-service:8081/api/v1/update;
       }
         
       location /delete {
-          proxy_pass http://api-service:8081/api/v1/delete;
+        if ($http_x_forwarded_client_cert = "") {
+            return 403 "Client certificate required.";
+        }
+        proxy_pass http://api-service:8081/api/v1/delete;
       }
     }
